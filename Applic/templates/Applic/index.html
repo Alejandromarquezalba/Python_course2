@@ -46,38 +46,27 @@
                         <h1>Inicio</h1>
                         {% endblock titulo %}
 
-                        
-
-
+    
                         {% block contenido %}
-                            {% if query %}
-                                <h2>Resultados para ''{{ query }}'':</h2>
-                                
-
-                                    {% if clients %}
-                                        <h3> Clients: </h3>
-                                            <ul>
-                                                {% for client in clients %}
-                                                    <li>Dinero: {{client.money}} - Producto: {{ client.product}}</li>
-                                                    {% empty%}
-                                                    <li>No se encontró clients</li>
-                                                {%endfor%}
-                                            </ul>
-                                        {% else %}
-                                        <h3>No se encontró</h3>
-                                    {% endif %}
-                                    {% if markets %}
-                                    <h3>Markets:</h3>
+                            
+                            <h2>Resultados para ''{{ query }}'':</h2>
+                                <h3> Clients: </h3>
+                                    <ul>
+                                        {% for client in clients %}
+                                            <li>Dinero: {{client.money}} - Producto: {{ client.product}}</li>
+                                            {% empty%}
+                                            <li>No se encontró clients</li>
+                                        {%endfor%}
+                                    </ul>
+                            <h3>Markets:</h3>
                                     <ul>
                                         {% for market in markets %}
                                             <li>Dinero: {{ market.money }} - Cliente: {{ market.client }}</li>
                                                 {% empty%}
                                                 <li>No se encontró markets</li>
                                         {% endfor %}
-                                    </ul>
-                                    {% endif %}
-                                    {% if workers %}
-                                    <h3>Workers:</h3>
+                                    </ul>  
+                            <h3>Workers:</h3>
                                     <ul>
                                         {% for worker in workers %}
                                             <li>Paga: {{ worker.pay }} - Horas: {{ worker.hours }}</li>
@@ -85,10 +74,7 @@
                                                 <li>No se encontró workers</li>
                                         {% endfor %}
                                     </ul>
-                                    {% endif %}
-                            {% else %}
-                                <p>No se encontraron resultados.</p>
-                            {% endif %}
+                                    <p>No se encontraron resultados.</p>
                         {% endblock %}
                         <!--
                         <h2>Resultados para '{{ query }}:</h2>'

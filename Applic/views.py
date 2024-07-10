@@ -12,7 +12,7 @@ def Home(request):
                 'content2':content2,
                 'content3':content3
                }
-    print(content)
+    
     return render(
         request, 
         'Applic/index.html', content)

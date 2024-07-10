@@ -14,6 +14,6 @@ urlpatterns = [
     path('form/', Form, name='form'),
     path('search/', Search, name='search'),
 
-    path('find/', views.Find, name='find'),
+    path('find/', Find, name='find'),
 ]
 
