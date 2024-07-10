@@ -46,123 +46,37 @@
                         <h1>Inicio</h1>
                         {% endblock titulo %}
 
-    
+                        
                         {% block contenido %}
+                            <h2>Resultados para '{{ query }}'</h2>
                             
-                            <h2>Resultados para ''{{ query }}'':</h2>
-                                <h3> Clients: </h3>
-                                    <ul>
-                                        {% for client in clients %}
-                                            <li>Dinero: {{client.money}} - Producto: {{ client.product}}</li>
-                                            {% empty%}
-                                            <li>No se encontró clients</li>
-                                        {%endfor%}
-                                    </ul>
-                            <h3>Markets:</h3>
-                                    <ul>
-                                        {% for market in markets %}
-                                            <li>Dinero: {{ market.money }} - Cliente: {{ market.client }}</li>
-                                                {% empty%}
-                                                <li>No se encontró markets</li>
-                                        {% endfor %}
-                                    </ul>  
-                            <h3>Workers:</h3>
-                                    <ul>
-                                        {% for worker in workers %}
-                                            <li>Paga: {{ worker.pay }} - Horas: {{ worker.hours }}</li>
-                                                {% empty%}
-                                                <li>No se encontró workers</li>
-                                        {% endfor %}
-                                    </ul>
-                                    <p>No se encontraron resultados.</p>
-                        {% endblock %}
-                        <!--
-                        <h2>Resultados para '{{ query }}:</h2>'
-                        <h3> Clients: </h3>
+                            <h3>Clients:</h3>
                             <ul>
                                 {% for client in clients %}
-                                    <li>Producto: {{client.product}} - Dinero {{ client.money}}</li>
-                                {%endfor%}
+                                    <li>ID: {{ client.id }} - Dinero: {{ client.money }} - Producto: {{ client.product }}</li>
+                                {% empty %}
+                                    <li>No se encontraron clients.</li>
+                                {% endfor %}
                             </ul>
-                        <h3>Markets:</h3>
-                        <ul>
-                            {% for market in markets %}
-                                <li>Cliente: {{ market.client }} - Dinero:
-                                    {{market.money}}</li>
-                            {% endfor %}
-                        </ul>
-                        -->
                             
-                        
-                        <!--
-                            <table class='table-striped table'>
-                                <thead>
-                                    <tr>
-                                        <th></th>
-                                        <th></th>
-                                    </tr>
-                                </thead>
-                                {% for c in content1 %}
-                                    <tbody>
-                                        <tr>
-                                            <td>{{ c.id}}</td>
-                                            <td>{{ c.money}}</td>
-                                            <td>{{ c.product}}</td>
-                                        </tr>
-                                        {% empty %}
-                                        <tr>
-                                            <td>'No hay datos disponibles de Client'</td>
-                                        </tr>
-                                    </tbody>
+                            <h3>Markets:</h3>
+                            <ul>
+                                {% for market in markets %}
+                                    <li>ID: {{ market.id }} - Dinero: {{ market.money }} - Cliente: {{ market.client }}</li>
+                                {% empty %}
+                                    <li>No se encontraron markets.</li>
                                 {% endfor %}
-                            </table>
+                            </ul>
                             
-                            <table class='table-striped table'>
-                                <thead>
-                                    <tr>
-                                        <th></th>
-                                        <th></th>
-                                    </tr>
-                                </thead>
-                                {% for m in content2 %}
-                                    <tbody>
-                                        <tr>
-                                            <td>{{ m.id}}</td>
-                                            <td>{{ m.money}}</td>
-                                            <td>{{ m.client}}</td>
-                                        </tr>
-                                        {% empty %}
-                                        <tr>
-                                            <td>'No hay datos disponibles de Market'</td>
-                                        </tr>
-                                    </tbody>
+                            <h3>Workers:</h3>
+                            <ul>
+                                {% for worker in workers %}
+                                    <li>ID: {{ worker.id }} - Paga: {{ worker.pay }} - Horas: {{ worker.hours }}</li>
+                                {% empty %}
+                                    <li>No se encontraron workers.</li>
                                 {% endfor %}
-                            </table>
-                            
-                            <table class='table-striped table'>
-                                <thead>
-                                    <tr>
-                                        <th></th>
-                                        <th></th>
-                                    </tr>
-                                </thead>
-                                {% for w in content3 %}
-                                    <tbody>
-                                        <tr>
-                                            <td>{{ w.id}}</td>
-                                            <td>{{ w.pay}}</td>
-                                            <td>{{ w.hours}}</td>
-                                        </tr>
-                                        {% empty %}
-                                        <tr>
-                                            <td>'No hay datos disponibles de Worker'</td>
-                                        </tr>
-                                    </tbody>
-                                {% endfor %}
-                            </table>
-
-                        -->
-                        
+                            </ul>
+                        {% endblock %}
                         
                         <p class="mb-0">The universe is almost 14 billion years old, and, wow! Life had no problem starting here on Earth! I think it would be inexcusably egocentric of us to suggest that we're alone in the universe.</p>
                     </div>

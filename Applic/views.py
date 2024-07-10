@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .forms import *
 from Applic.models import *
 
@@ -10,12 +10,11 @@ def Home(request):
     content = {
                 'content1':content1,
                 'content2':content2,
-                'content3':content3
+                'content3':content3,
+                'query':''
                }
     
-    return render(
-        request, 
-        'Applic/index.html', content)
+    return render(request, 'Applic/index.html', content)
 
 
 #def Home2(request):
@@ -32,68 +31,48 @@ def Acerca(request):
 def Contacto(request):
     return render(request, 'Applic/contacto.html')
 
-def Form (request):
-    if request.method== 'POST':
-        form = classForm(request.POST)
-        if form.is_valid():
-            data_money = form.cleaned_data.get('money'),
-            data_product = form.cleaned_data.get('product')
-            form_save = Client(money=data_money, product=data_product)
-            form_save.save()
-            
-            return render(request, 'Applic/Form.html')
+def Form(request):
+    if request.method == 'POST':
+        client_form = ClientForm(request.POST)
+        market_form = MarketForm(request.POST)
+        worker_form = WorkerForm(request.POST)
+        
+        if client_form.is_valid():
+            Client.objects.create(**client_form.cleaned_data)
+            return redirect('home')
+        elif market_form.is_valid():
+            Market.objects.create(**market_form.cleaned_data)
+            return redirect('home')
+        elif worker_form.is_valid():
+            Worker.objects.create(**worker_form.cleaned_data)
+            return redirect('home')
     else:
-        form = classForm()
+        client_form = ClientForm()
+        market_form = MarketForm()
+        worker_form = WorkerForm()
     
-    return render(request, 'Applic/Form.html', {'form':form})
-
-
-def Form2 (request):
-    if request.method== 'POST':
-        form2 = classForm2(request.POST)
-        if form2.is_valid():
-            data_money2 = form2.cleaned_data.get('money'),
-            data_client = form2.cleaned_data.get('client')
-            form_save = Market(money=data_money2, client=data_client)
-            form_save.save()
-            
-            return render(request, 'Applic/Form.html')
-    else:
-        form2 = classForm2()
-    
-    return render(request, 'Applic/Form.html', {'form':form2})
-
-
-def Form3 (request):
-    if request.method== 'POST':
-        form3 = classForm3(request.POST)
-        if form3.is_valid():
-            data_pay = form3.cleaned_data.get('pay'),
-            data_hours = form3.cleaned_data.get('hours')
-            form_save = Worker(pay=data_pay, hours=data_hours)
-            form_save.save()
-            
-            return render(request, 'Applic/Form.html')
-    else:
-        form3 = classForm3()
-    
-    return render(request, 'Applic/Form.html', {'form':form3})
+    return render(request, 'Applic/form.html', {
+        'form': client_form,
+        'form2': market_form,
+        'form3': worker_form
+    })
 
 
 def Search (request):
     return render(request, 'Applic/search.html')
 
 def Find(request):
-    query = request.GET.get('search_term', '')    
+    query = request.GET.get('search_term', '')
     clients = Client.objects.filter(money__icontains=query) | Client.objects.filter(product__icontains=query)
     markets = Market.objects.filter(money__icontains=query) | Market.objects.filter(client__icontains=query)
     workers = Worker.objects.filter(pay__icontains=query) | Worker.objects.filter(hours__icontains=query)
-    context = {
-               'content1':clients,
-               'content2':markets,
-               'content3':workers,
-               'query':query
-              }
     
+    context = {
+        'clients': clients,
+        'markets': markets,
+        'workers': workers,
+        'query': query
+    }
+
     return render(request, 'Applic/index.html', context)
     

@@ -9,11 +9,8 @@ urlpatterns = [
     path('acerca/', Acerca, name='acerca'),
     path('contacto/', Contacto, name='contacto'),
 
-
-
     path('form/', Form, name='form'),
-    path('search/', Search, name='search'),
-
-    path('find/', Find, name='find'),
+    path('search/', Search, name='search'),  
+    path('find/', Find, name='Find'),
 ]
 
